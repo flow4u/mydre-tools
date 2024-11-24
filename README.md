@@ -34,7 +34,7 @@ pip install .[mydre_config_encrypter]
 ### Install from Source (Development)
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/mydre-tools.git
+   git clone https://github.com/flow4u/mydre-tools.git
    cd mydre-tools
    ```
 
