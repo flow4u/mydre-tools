@@ -282,6 +282,11 @@ class UploadForm:
             progress_window = tk.Toplevel(self.master)
             progress_window.title("Upload Progress")
             progress_window.geometry("300x150")
+            
+            # Set the icon for the progress window
+            icon_path = os.path.join(os.path.dirname(__file__), '..', '..', 'assets', 'favicon.ico')
+            if os.path.exists(icon_path):
+                progress_window.iconbitmap(icon_path)
 
             label = tk.Label(progress_window, text="Uploading files...")
             label.pack(pady=10)
@@ -303,6 +308,9 @@ class UploadForm:
                 f.write(f"Uploaded by: {user_name}\n")
                 f.write(f"Uploaded on: {upload_time}\n\n")
                 f.write("List of all the uploaded files:\n")
+                # Write all filenames to the txt file first
+                for file in self.selected_files:
+                    f.write(f"{os.path.basename(file)}\n")
 
             # Calculate total files including the user name file
             total_files = len(self.selected_files) + 1
@@ -318,14 +326,10 @@ class UploadForm:
             for i, file in enumerate(self.selected_files, start=2):
                 progress = (i / total_files) * 100
                 progress_bar['value'] = progress
-                file_label.config(text=f"Uploading: {os.path.basename(file)}")
+                filename = os.path.basename(file)
+                file_label.config(text=f"Uploading: {filename}")
                 self.master.update_idletasks()
-
                 uploader.file2(file)
-
-                # Append the uploaded file name to the user file
-                with open(user_file_path, "a") as f:
-                    f.write(f"{os.path.basename(file)}\n")
 
             uploader.commit_workspace_container()
 

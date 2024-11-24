@@ -3,6 +3,7 @@ import os
 import platform
 import subprocess
 import sys
+import shutil
 
 def check_dependencies():
     """Check and install required dependencies."""
@@ -30,9 +31,26 @@ def check_dependencies():
                 return False
     return True
 
+def cleanup_build_artifacts():
+    """Clean up build artifacts but leave dist folder."""
+    # Remove build folder if it exists
+    if os.path.exists('build'):
+        print("Removing build folder...")
+        shutil.rmtree('build')
+    
+    # Remove all .spec files
+    for file in os.listdir('.'):
+        if file.endswith('.spec'):
+            print(f"Removing {file}...")
+            os.remove(file)
+            
+    print("Cleanup completed.")
+
 def build_executables():
     """Build executables for the current platform."""
     
+    cleanup_build_artifacts()
+
     # Check dependencies first
     if not check_dependencies():
         print("Error: Required dependencies could not be installed.")
