@@ -1,0 +1,4 @@
+-r base.txt
+Pillow>=10.0.0
+requests>=2.31.0
+azure-storage-blob>=12.0.0 
