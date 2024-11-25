@@ -2,146 +2,164 @@
 
 Tools for managing and interacting with myDRE (my Data Research Environment) workspace.
 
-## Components
+## Prerequisites
 
-This repository contains two main tools specifically designed for myDRE Workspaces:
-- **myDRE Uploader**: For uploading files to your myDRE workspace
-- **myDRE Config Encrypter**: For creating encrypted configuration files required by the myDRE Uploader
+Before installation, ensure you have:
 
-## About myDRE
+1. Python 3.12.x (Do not use Python 3.13)
+   - Download from: https://www.python.org/downloads/release/python-3129/
+   - Select the appropriate installer for your system (Windows/macOS/Linux)
 
-myDRE (my Data Research Environment) is a secure platform for data sharing and collaboration. These tools are specifically designed to work with myDRE Workspaces and cannot be used with other platforms.
+2. Visual C++ Redistributable (Windows only):
+   - VC_redist.x64: https://aka.ms/vs/17/release/vc_redist.x64.exe
+   - VC_redist.x86: https://aka.ms/vs/17/release/vc_redist.x86.exe
 
-## Installation
+## What is myDRE?
 
-You can install the components separately or together:
+myDRE (my Data Research Environment) is a secure platform for data sharing and collaboration. These tools help you:
 
-### Install Everything
+- Create encrypted configuration files for workspace access
+- Upload files to a myDRE workspace securely
+
+
+⚠️ **Important**: These tools only work with myDRE Workspaces. If you don't have a myDRE workspace, please visit [andrea-cloud.com](https://andrea-cloud.com) first.
+
+## Installation Guide
+
+### Option 1: Simple Installation (Recommended for Most Users)
+
+1. Download the latest release from: https://github.com/flow4u/mydre-tools/releases
+2. Run the installer for your platform:
+   - Windows: Double-click the `.exe` file
+   - macOS: Mount the `.dmg` and drag to Applications
+   - Linux: Use the provided `.AppImage` file
+
+### Option 2: Installation via pip
+
+Install all components:
 ```bash
 pip install .
 ```
 
-### Install Only the myDRE Uploader
+Or install specific components:
 ```bash
+# For uploading files only:
 pip install .[mydre_uploader]
-```
 
-### Install Only the myDRE Config Encrypter
-```bash
+# For configuration encryption only:
 pip install .[mydre_config_encrypter]
 ```
 
-### Install from Source (Development)
+### Option 3: Developer Installation
+
 1. Clone the repository:
-   ```bash
-   git clone https://github.com/flow4u/mydre-tools.git
-   cd mydre-tools
-   ```
+```bash
+git clone https://github.com/flow4u/mydre-tools.git
+cd mydre-tools
+```
 
-2. Create and activate a virtual environment (recommended):
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
+2. Create and activate a virtual environment:
+```bash
+# Windows
+python -m venv venv
+venv\Scripts\activate
 
-3. Install the desired components:
-   ```bash
-   # For everything:
-   pip install -e .
+# macOS/Linux
+python -m venv venv
+source venv/bin/activate
+```
 
-   # For only the myDRE Uploader:
-   pip install -e ".[mydre_uploader]"
+3. Install in development mode:
+```bash
+pip install -e .
+```
 
-   # For only the myDRE Config Encrypter:
-   pip install -e ".[mydre_config_encrypter]"
-   ```
-
-## Usage
+## Using the Tools
 
 ### myDRE Uploader
-The myDRE Uploader is used to securely upload files to your myDRE workspace:
-```bash
-mydre-uploader
-```
 
-### myDRE Config Encrypter
-The myDRE Config Encrypter is used by workspace administrators to create encrypted configuration files:
-```bash
-mydre-config-encrypter
-```
+1. Launch the uploader:
+   ```bash
+   mydre-uploader
+   ```
+   Or use the desktop shortcut/application icon
 
-## Building Executables
+2. First-time setup:
+   - Enter your workspace credentials (get these from your administrator)
+   - Select the destination folder
+   - Choose files to upload
 
-You can create standalone executables using the provided build script:
+### myDRE Config Encrypter (Administrators Only)
+
+1. Launch the config encrypter:
+   ```bash
+   mydre-config-encrypter
+   ```
+   Or use the desktop shortcut/application icon
+
+2. Follow the wizard to:
+   - Set up workspace credentials
+   - Generate encrypted configuration files
+   - Distribute to team members
+
+## Building from Source
+
+Want to create your own executables? Here's how:
 
 1. Install PyInstaller:
-   ```bash
-   pip install pyinstaller
-   ```
+```bash
+pip install pyinstaller
+```
 
 2. Run the build script:
-   ```bash
-   python build.py
+```bash
+python build.py
+```
+
+The executables will be created in the `dist` directory:
+- Windows: `.exe` files
+- macOS: `.app` bundles
+- Linux: binary executables
+
+## Troubleshooting
+
+### Common Issues
+
+1. **Installation Fails**
+   - Ensure Python 3.12.x is installed
+   - On Windows, verify both VC++ redistributables are installed
+   - Try running as administrator
+
+2. **Build Errors**
    ```
+   Error: could not install packages due to an OSError: [errno 22] invalid argument
+   ```
+   Solution:
+   - Close all command prompts
+   - Run as administrator
+   - Navigate to project: `cd path\to\mydre-tools`
+   - Activate environment: `venv\Scripts\activate`
+   - Retry: `python build.py`
 
-This will create two executables in the `dist` directory:
-- `mydre-uploader` - The file upload tool
-- `mydre-config-encrypter` - The configuration encryption tool
+3. **Runtime Errors**
+   - Check your workspace credentials
+   - Verify internet connection
+   - Contact your workspace administrator
 
-The executables will be created according to your platform:
-- Windows: Creates `.exe` files
-- macOS: Creates `.app` bundles (with proper windowing support)
-- Linux: Creates binary executables
+## Additional Resources
 
-The build script automatically:
-- Includes all necessary modules and dependencies
-- Adds the favicon.ico to the executables
-- Creates standalone executables that don't require Python installation
-- Handles platform-specific requirements (like windowed mode for macOS)
+- [Detailed Documentation](docs/README.md)
+- [Contributing Guidelines](CONTRIBUTING.md)
+- [Changelog](CHANGELOG.md)
+- [License](LICENSE)
 
-Note: The old PyInstaller commands in the README are no longer needed as the build script handles everything automatically.
+## Support
 
-## Important Note
-
-These tools are specifically designed for use with myDRE Workspaces. They require proper authentication and configuration from your myDRE workspace administrator. If you don't have a myDRE workspace, these tools will not be useful for you.
-
-For more information about myDRE Workspaces, visit [andrea-cloud.com](https://andrea-cloud.com).
-
-## Contributing
-
-Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details on how to contribute to this project.
+Need help? 
+1. Check the [Troubleshooting Guide](docs/troubleshooting.md)
+2. Contact your workspace administrator
+3. Visit [andrea-cloud.com/support](https://andrea-cloud.com/support)
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Changelog
-
-See [CHANGELOG.md](CHANGELOG.md) for a list of changes.
-
-# Troubleshooting
-
-## Build Process Errors
-
-If you encounter an error during the build process like:
-```
-Error: could not install packages due to an OSError: [errno 22] invalid argument
-```
-
-Try these steps:
-1. Close the Command Prompt completely
-2. Open Command Prompt as Administrator (Right-click -> Run as administrator)
-3. Navigate to your project directory:
-   ```batch
-   cd path\to\mydre-tools
-   ```
-4. Activate the virtual environment:
-   ```batch
-   venv\Scripts\activate
-   ```
-5. Run the build process again:
-   ```batch
-   python build.py
-   ```
-
-This often resolves temporary path or lock file issues that can occur during the build process. Running as administrator can help resolve permission-related issues.
