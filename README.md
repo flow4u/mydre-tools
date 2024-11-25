@@ -118,3 +118,30 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ## Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for a list of changes.
+
+# Troubleshooting
+
+## Build Process Errors
+
+If you encounter an error during the build process like:
+```
+Error: could not install packages due to an OSError: [errno 22] invalid argument
+```
+
+Try these steps:
+1. Close the Command Prompt completely
+2. Open Command Prompt as Administrator (Right-click -> Run as administrator)
+3. Navigate to your project directory:
+   ```batch
+   cd path\to\mydre-tools
+   ```
+4. Activate the virtual environment:
+   ```batch
+   venv\Scripts\activate
+   ```
+5. Run the build process again:
+   ```batch
+   python build.py
+   ```
+
+This often resolves temporary path or lock file issues that can occur during the build process. Running as administrator can help resolve permission-related issues.
