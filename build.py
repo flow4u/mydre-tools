@@ -7,16 +7,33 @@ import shutil
 
 def check_dependencies():
     """Check and install required dependencies."""
+    # First check for tkinter as it's a special case
+    print("Checking for tkinter...")
+    try:
+        import tkinter
+        print("✓ tkinter is installed")
+    except ImportError:
+        print("""
+ERROR: tkinter is not installed. 
+Please reinstall Python with tkinter:
+1. Uninstall current Python
+2. Download Python from python.org
+3. During installation:
+   - Check 'tcl/tk and IDLE' in optional features
+   - Check 'Add Python to PATH'
+""")
+        return False
+
     required_packages = [
         'pyinstaller',
         'cryptography',
         'Pillow',
         'requests',
         'azure-storage-blob',
-        'requests'
+        'tk'  # Add tk to required packages
     ]
     
-    print("Checking dependencies...")
+    print("\nChecking other dependencies...")
     for package in required_packages:
         try:
             __import__(package)

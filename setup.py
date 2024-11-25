@@ -25,7 +25,13 @@ setup(
         "Operating System :: OS Independent",
     ],
     python_requires=">=3.7",
-    install_requires=read_requirements("base.txt"),
+    install_requires=[
+        'cryptography>=35.0.0',
+        'Pillow>=8.0.0',
+        'requests>=2.25.0',
+        'azure-storage-blob>=12.0.0',
+        'tk>=0.1.0',
+    ],
     extras_require={
         'mydre_uploader': read_requirements("mydre_uploader.txt"),
         'mydre_config_encrypter': read_requirements("mydre_config_encrypter.txt"),

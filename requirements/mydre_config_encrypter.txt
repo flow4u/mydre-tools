@@ -1,1 +1,3 @@
 -r base.txt 
+cryptography>=35.0.0
+Pillow>=8.0.0 
