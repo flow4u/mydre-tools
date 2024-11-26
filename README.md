@@ -7,12 +7,17 @@ Tools for managing and interacting with myDRE (my Data Research Environment) wor
 Before installation, ensure you have:
 
 1. Python 3.12.x (Do not use Python 3.13)
+   - Using in myDRE [allowlist and configure Python usage](https://support.mydre.org/portal/en/kb/articles/domains-to-be-allowlisted#Python)
    - Download from: https://www.python.org/downloads/release/python-3129/
    - Select the appropriate installer for your system (Windows/macOS/Linux)
 
 2. Visual C++ Redistributable (Windows only):
+   - in myDRE Workspace: allowlist aka.ms
    - VC_redist.x64: https://aka.ms/vs/17/release/vc_redist.x64.exe
    - VC_redist.x86: https://aka.ms/vs/17/release/vc_redist.x86.exe
+  
+3. Using from within myDRE Workspace
+   - Allowlist azure-api.net
 
 ## What is myDRE?
 
